@@ -61,24 +61,28 @@ const galeria = [
         </div>
       </a>
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
-        <span class="hamburguer"></span>
-      </button>
-
       <nav class="menu-navegacao" id="menu-navegacao" aria-label="Menu principal">
-        <a href="#inicio" class="link-nav">Início</a>
+        <a href="#inicio" class="link-nav ativo">Início</a>
         <a href="#servicos" class="link-nav">Serviços</a>
         <a href="#calendario-secao" class="link-nav">Agendamento</a>
         <a href="#galeria-secao" class="link-nav">Galeria</a>
-        <a href="#sincronizacao" class="link-nav">Adicionar Mídia</a>
         <a href="#orcamento" class="link-nav">Orçamento</a>
+        <a href="#sincronizacao" class="link-nav">Mídia</a>
         <a href="#contato" class="link-nav">Contatos</a>
       </nav>
 
       <div class="header-acoes">
-        <button type="button" class="btn btn-outline btn-sm btn-admin-header" id="btn-abrir-admin">Área Admin 🔐</button>
-        <a class="btn btn-dourado btn-sm" href="#calendario-secao">Agendar Horário ↗</a>
+        <button type="button" class="btn-admin-header" id="btn-abrir-admin" title="Painel Administrativo do Proprietário">
+          <span>🔐</span> Admin
+        </button>
+        <a class="btn btn-prata btn-sm btn-header-agendar" href="#calendario-secao">
+          Agendar Horário ↗
+        </a>
       </div>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <span class="hamburguer"></span>
+      </button>
     </div>
   </header>
 

@@ -92,8 +92,10 @@ function inicializarMenuMobile() {
     botaoMenu.setAttribute("aria-expanded", String(aberto));
   });
 
-  menuNav.querySelectorAll("a").forEach(link => {
+  menuNav.querySelectorAll(".link-nav").forEach(link => {
     link.addEventListener("click", () => {
+      menuNav.querySelectorAll(".link-nav").forEach(l => l.classList.remove("ativo"));
+      link.classList.add("ativo");
       menuNav.classList.remove("aberto");
       botaoMenu.setAttribute("aria-expanded", "false");
     });
