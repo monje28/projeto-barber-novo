@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#090a0d">
+  <meta name="description" content="Barbearia Rio Preto em São José do Rio Preto - Cortes modernos degradê, barba tradicional com toalha quente, ambiente climatizado e atendimento exclusivo. Solicite seu orçamento via WhatsApp.">
+  <meta name="keywords" content="barbearia são josé do rio preto, corte cabelo rio preto, barba rio preto, degradê, fade, barboterapia, navalha">
+  <title>Barbearia Rio Preto | Cabelo, Barba & Estilo Tradicional em São José do Rio Preto - SP</title>
+  
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Lista de fotos e vídeos sincronizada automaticamente por atualizar_galeria.py / atualizar_galeria.bat -->
+  <script>
+const galeria = [
+  {
+    "tipo": "imagem",
+    "src": "MIDEA/fotografia/ambiente_barbearia_vip.jpg",
+    "titulo": "Ambiente barbearia vip"
+  },
+  {
+    "tipo": "imagem",
+    "src": "MIDEA/fotografia/barba_modelada_tradicional.jpg",
+    "titulo": "Barba modelada tradicional"
+  },
+  {
+    "tipo": "imagem",
+    "src": "MIDEA/fotografia/barba_terapia_toalha_quente.jpg",
+    "titulo": "Barba terapia toalha quente"
+  },
+  {
+    "tipo": "imagem",
+    "src": "MIDEA/fotografia/corte_infantil_moderno.jpg",
+    "titulo": "Corte infantil moderno"
+  },
+  {
+    "tipo": "imagem",
+    "src": "MIDEA/fotografia/corte_social_pompadour.jpg",
+    "titulo": "Corte social pompadour"
+  },
+  {
+    "tipo": "imagem",
+    "src": "MIDEA/fotografia/degrade_navalhado.jpg",
+    "titulo": "Degrade navalhado"
+  }
+];
+  </script>
+
+  <!-- Script puro da aplicação -->
+  <script src="arquivo.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== CABEÇALHO / MENU DE NAVEGAÇÃO ==================== -->
+  <header class="cabecalho" id="topo">
+    <div class="container container-header">
+      <a class="marca" href="#inicio" aria-label="Página inicial Barbearia Rio Preto">
+        <img src="MIDEA/LOGO.svg" alt="Logo Barbearia Rio Preto" class="logo-icone" onerror="this.src='MIDEA/LOGO.png'">
+        <div class="marca-texto">
+          <span class="marca-nome">BARBEARIA RIO PRETO</span>
+          <span class="marca-cidade">SÃO JOSÉ DO RIO PRETO • SP</span>
+        </div>
+      </a>
+
+      <nav class="menu-navegacao" id="menu-navegacao" aria-label="Menu principal">
+        <a href="#inicio" class="link-nav ativo">Início</a>
+        <a href="#servicos" class="link-nav">Serviços</a>
+        <a href="#calendario-secao" class="link-nav">Agendamento</a>
+        <a href="#galeria-secao" class="link-nav">Galeria</a>
+        <a href="#orcamento" class="link-nav">Orçamento</a>
+        <a href="#sincronizacao" class="link-nav">Mídia</a>
+        <a href="#contato" class="link-nav">Contatos</a>
+      </nav>
+
+      <div class="header-acoes">
+        <button type="button" class="btn-admin-header" id="btn-abrir-admin" title="Painel Administrativo do Proprietário">
+          <span>🔐</span> Admin
+        </button>
+        <a class="btn btn-prata btn-sm btn-header-agendar" href="#calendario-secao">
+          Agendar Horário ↗
+        </a>
+      </div>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu de navegação" aria-expanded="false">
+        <span class="hamburguer"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="conteudo-principal">
+
+    <!-- ==================== HERO / APRESENTAÇÃO ==================== -->
+    <section class="hero" id="inicio">
+      <div class="hero-overlay"></div>
+      <div class="container hero-conteudo">
+        <div class="hero-texto">
+          <div class="tag-localizacao">
+            <span class="ponto-verde"></span> SÃO JOSÉ DO RIO PRETO • SP • REDENTORA / CENTRO
+          </div>
+          <h1 class="hero-titulo">
+            Tradição, navalha afiada e <em>estilo impecável.</em>
+          </h1>
+          <p class="hero-subtitulo">
+            Cortes modernos, degradê de alta precisão, alinhamento de barba com toalha quente e massagem facial. Desfrute de um ambiente climatizado com café expresso e cerveja artesanal em São José do Rio Preto.
+          </p>
+
+          <div class="hero-botoes">
+            <a class="btn btn-dourado" href="#orcamento">
+              <span>✦</span> Solicitar Orçamento no WhatsApp
+            </a>
+            <a class="btn btn-secundario" href="#galeria-secao">
+              Explorar Galeria de Cortes ↗
+            </a>
+          </div>
+
+          <div class="hero-metricas">
+            <div class="metrica">
+              <strong>+5.000</strong>
+              <span>Cortes & Barbas Realizados</span>
+            </div>
+            <div class="divisor-vertical"></div>
+            <div class="metrica">
+              <strong>Nota 4.9 ★</strong>
+              <span>Avaliações em São José do Rio Preto</span>
+            </div>
+            <div class="divisor-vertical"></div>
+            <div class="metrica">
+              <strong>100% VIP</strong>
+              <span>Toalha Quente & Ambiente Climatizado</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card-destaque">
+          <div class="moldura-logo">
+            <img src="MIDEA/LOGO.png" alt="Emblema Barbearia Rio Preto" class="logo-destaque" onerror="this.src='MIDEA/LOGO.svg'">
+          </div>
+          <div class="card-destaque-info">
+            <span class="card-tag">ESTILO & ATENDIMENTO</span>
+            <h3>Barbearia Rio Preto</h3>
+            <p>Atendimento com hora marcada ou por ordem de chegada no melhor ponto de Rio Preto.</p>
+            <a class="link-dourado" href="#orcamento">Fazer um orçamento agora →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FAIXA ROTATIVA / HIGHLIGHTS ==================== -->
+    <section class="faixa-destaques" aria-hidden="true">
+      <div class="faixa-conteudo">
+        <span>CORTE DEGRADÊ & FADE</span>
+        <span class="icone-separador">✦</span>
+        <span>BARBOTERAPIA COM TOALHA QUENTE</span>
+        <span class="icone-separador">✦</span>
+        <span>COMBO CORTE & BARBA</span>
+        <span class="icone-separador">✦</span>
+        <span>SÃO JOSÉ DO RIO PRETO • SP</span>
+        <span class="icone-separador">✦</span>
+        <span>NAVALHA AFIADA & PRODUTOS PREMIUM</span>
+        <span class="icone-separador">✦</span>
+        <span>ATENDIMENTO EXCLUSIVO & AMBIENTE VIP</span>
+        <span class="icone-separador">✦</span>
+      </div>
+    </section>
+
+    <!-- ==================== SERVIÇOS E PREÇOS ==================== -->
+    <section class="secao servicos-secao" id="servicos">
+      <div class="container">
+        <div class="cabecalho-secao text-center">
+          <span class="eyebrow">TABELA DE SERVIÇOS</span>
+          <h2>Cuidado completo para seu cabelo e sua barba</h2>
+          <p class="secao-descricao">Escolha um serviço individual ou combine opções para o seu orçamento personalizado.</p>
+        </div>
+
+        <div class="grid-servicos" id="grade-servicos">
+          <!-- Card 1 -->
+          <article class="card-servico" data-servico="Corte Masculino Degradê / Fade" data-valor="55">
+            <div class="servico-cabecalho">
+              <span class="servico-icone">✂️</span>
+              <span class="servico-tempo">45 min</span>
+            </div>
+            <h3>Corte Degradê / Fade</h3>
+            <p>Fade navalhado, taper fade, corte tesoura clássico com lavagem especial e finalização com pomada modeladora.</p>
+            <div class="servico-rodape">
+              <span class="servico-preco">R$ 55,00</span>
+              <button class="btn btn-outline btn-incluir" type="button" data-add="Corte Masculino Degradê / Fade" data-preco="55">+ Incluir no Orçamento</button>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card-servico destaque-card" data-servico="Barba Terapia com Toalha Quente" data-valor="45">
+            <span class="badge-destaque">MAIS PEDIDO</span>
+            <div class="servico-cabecalho">
+              <span class="servico-icone">🪒</span>
+              <span class="servico-tempo">40 min</span>
+            </div>
+            <h3>Barba Terapia com Toalha Quente</h3>
+            <p>Alinhamento de barba na lâmina, toalha quente com óleos essenciais, massagem facial relaxante e balm hidratante.</p>
+            <div class="servico-rodape">
+              <span class="servico-preco">R$ 45,00</span>
+              <button class="btn btn-dourado btn-incluir" type="button" data-add="Barba Terapia com Toalha Quente" data-preco="45">+ Incluir no Orçamento</button>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card-servico" data-servico="Combo Imperial (Cabelo + Barba)" data-valor="85">
+            <span class="badge-destaque ouro">ECONOMIZE R$ 15</span>
+            <div class="servico-cabecalho">
+              <span class="servico-icone">👑</span>
+              <span class="servico-tempo">75 min</span>
+            </div>
+            <h3>Combo Imperial (Cabelo + Barba)</h3>
+            <p>O pacote completo: corte de cabelo à sua escolha + barboterapia com toalha quente + lavagem capilar e cerveja cortesia.</p>
+            <div class="servico-rodape">
+              <span class="servico-preco">R$ 85,00</span>
+              <button class="btn btn-outline btn-incluir" type="button" data-add="Combo Imperial (Cabelo + Barba)" data-preco="85">+ Incluir no Orçamento</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CALENDÁRIO E AGENDAMENTO DE HORÁRIOS ==================== -->
+    <section class="secao calendario-secao" id="calendario-secao">
+      <div class="container">
+        <div class="cabecalho-secao text-center">
+          <span class="eyebrow">AGENDE SEU HORÁRIO EM SÃO JOSÉ DO RIO PRETO</span>
+          <h2>Calendário de Agendamento com Horários em Tempo Real</h2>
+          <p class="secao-descricao">
+            Selecione uma data no calendário abaixo e escolha seu horário. Quando o proprietário aceitar seu agendamento, o horário fica <strong>automaticamente bloqueado</strong> para outros clientes.
+          </p>
+        </div>
+
+        <div class="calendario-layout-grid">
+          <!-- Coluna 1: Calendário Interativo + Horários do Dia -->
+          <div class="box-calendario-horarios">
+            <!-- Widget Calendário -->
+            <div class="widget-calendario">
+              <div class="cal-cabecalho">
+                <button type="button" class="btn-cal-nav" id="cal-mes-anterior" aria-label="Mês anterior">‹</button>
+                <h3 id="cal-titulo-mes" class="cal-titulo-mes">Mês / Ano</h3>
+                <button type="button" class="btn-cal-nav" id="cal-mes-proximo" aria-label="Próximo mês">›</button>
+              </div>
+
+              <div class="cal-dias-semana">
+                <span>Dom</span>
+                <span>Seg</span>
+                <span>Ter</span>
+                <span>Qua</span>
+                <span>Qui</span>
+                <span>Sex</span>
+                <span>Sáb</span>
+              </div>
+
+              <div class="cal-grade-dias" id="cal-grade-dias">
+                <!-- Preenchido via JavaScript -->
+              </div>
+
+              <div class="cal-legenda">
+                <div class="item-legenda"><span class="legenda-cor disponivel"></span> Dia Disponível</div>
+                <div class="item-legenda"><span class="legenda-cor selecionado"></span> Data Selecionada</div>
+                <div class="item-legenda"><span class="legenda-cor bloqueado"></span> Horário Ocupado / Bloqueado</div>
+                <div class="item-legenda"><span class="legenda-cor fechado"></span> Domingo Fechado</div>
+              </div>
+            </div>
+
+            <!-- Grade de Horários -->
+            <div class="widget-horarios">
+              <div class="horarios-cabecalho">
+                <h4>Horários para: <span id="data-selecionada-texto">Carregando data...</span></h4>
+                <span class="badge-status-dia" id="badge-status-dia">Expediente Aberto</span>
+              </div>
+
+              <p class="horarios-instrucao">Clique no horário disponível desejado para preencher a sua solicitação:</p>
+
+              <p id="status-agenda-compartilhada" role="status" aria-live="polite">Conectando a agenda compartilhada...</p>
+              <div class="grid-slots-horarios" id="grid-slots-horarios">
+                <!-- Gerado dinamicamente -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna 2: Formulário do Cliente -->
+          <div class="box-formulario-agendamento">
+            <div class="card-form-agendamento">
+              <div class="form-topo-tag">
+                <span class="card-tag">AGENDAMENTO RÁPIDO</span>
+                <span class="badge-aviso-bloqueio">🔒 Bloqueio Automático Após Aceite</span>
+              </div>
+              <h3>Preencha Seus Dados</h3>
+              <p class="sub-form-info">Informe seu nome e telefone para pré-agendar seu atendimento em São José do Rio Preto.</p>
+
+              <form id="form-cliente-agendamento" novalidate>
+                <div class="form-grupo">
+                  <label for="agend-cliente-nome">Seu Nome Completo *</label>
+                  <input type="text" id="agend-cliente-nome" name="nome" required maxlength="80" placeholder="Ex: Roberto Silva" autocomplete="name">
+                </div>
+
+                <div class="form-grupo">
+                  <label for="agend-cliente-tel">Seu Telefone / WhatsApp (com DDD) *</label>
+                  <input type="tel" id="agend-cliente-tel" name="telefone" required maxlength="20" placeholder="(17) 99999-9999" autocomplete="tel">
+                </div>
+
+                <div class="form-grupo">
+                  <label for="agend-cliente-servico">Serviço Desejado *</label>
+                  <select id="agend-cliente-servico" name="servico" required>
+                    <option value="Corte Degradê / Fade (R$ 55,00)">Corte Degradê / Fade — R$ 55,00</option>
+                    <option value="Barba Terapia com Toalha Quente (R$ 45,00)">Barba Terapia com Toalha Quente — R$ 45,00</option>
+                    <option value="Combo Imperial Cabelo + Barba (R$ 85,00)">Combo Imperial (Cabelo + Barba) — R$ 85,00</option>
+                  </select>
+                </div>
+
+                <!-- Resumo Selecionado -->
+                <div class="box-resumo-slot-selecionado">
+                  <div class="resumo-slot-item">
+                    <span>📅 Data Escolhida:</span>
+                    <strong id="resumo-data-display">Selecione uma data</strong>
+                  </div>
+                  <div class="resumo-slot-item">
+                    <span>⏰ Horário Escolhido:</span>
+                    <strong id="resumo-horario-display">Selecione um horário</strong>
+                  </div>
+                </div>
+
+                <button class="btn btn-dourado btn-agendar-submit" type="submit" id="btn-confirmar-agendamento">
+                  <span>📅</span> Confirmar Pré-Agendamento
+                </button>
+
+                <p id="msg-agendamento-retorno" class="msg-retorno" role="status"></p>
+
+                <div class="aviso-proprietario-box">
+                  <p><strong>ℹ️ Como funciona o bloqueio:</strong></p>
+                  <p>Sua solicitação é registrada no sistema. Assim que o proprietário entrar na Área Administrativa e clicar em <strong>"Aceitar"</strong>, este horário será <strong>automaticamente bloqueado</strong> para qualquer outra pessoa.</p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GALERIA DE FOTOS E VÍDEOS ==================== -->
+    <section class="secao galeria-secao" id="galeria-secao">
+      <div class="container">
+        <div class="cabecalho-secao">
+          <div>
+            <span class="eyebrow">PORTFÓLIO DE CORTES & BARBAS</span>
+            <h2>Veja os trabalhos da nossa barbearia</h2>
+          </div>
+          <p class="secao-descricao">
+            Fotos e vídeos reais dos cortes realizados em São José do Rio Preto. Clique em qualquer foto ou vídeo para ampliar em alta definição.
+          </p>
+        </div>
+
+        <!-- Filtros e Barra de Busca -->
+        <div class="galeria-controles">
+          <div class="filtros" role="group" aria-label="Filtrar galeria de mídias">
+            <button class="filtro-btn ativo" data-filtro="todos" aria-pressed="true">Todos os Trabalhos</button>
+            <button class="filtro-btn" data-filtro="imagem" aria-pressed="false">📸 Cortes & Barbas (Fotos)</button>
+            <button class="filtro-btn" data-filtro="video" aria-pressed="false">🎥 Vídeos</button>
+          </div>
+
+          <div class="busca-galeria">
+            <input type="search" id="busca-galeria-input" placeholder="Buscar corte (ex: degrade, barba, social)..." aria-label="Buscar na galeria">
+          </div>
+        </div>
+
+        <!-- Grade Dinâmica da Galeria -->
+        <div id="galeria" class="galeria-grid" aria-live="polite"></div>
+        <p id="galeria-status" class="galeria-status-msg" role="status"></p>
+      </div>
+    </section>
+
+    <!-- ==================== CAMPO DE ADICIONAR E SINCRONIZAR MÍDIAS ==================== -->
+    <section class="secao sincronizacao-secao" id="sincronizacao">
+      <div class="container">
+        <div class="box-sincronizacao">
+          <div class="sinc-info">
+            <span class="eyebrow">SINCRONIZAÇÃO AUTOMÁTICA</span>
+            <h2>Gerenciador de Fotos e Vídeos da Pasta <code>/MIDEA</code></h2>
+            <p>
+              Você pode adicionar novas fotos e vídeos à galeria a qualquer momento. O sistema está integrado com os scripts <strong>atualizar_galeria.bat</strong> e <strong>atualizar_galeria.py</strong>.
+            </p>
+
+            <div class="passos-sinc">
+              <div class="passo-item">
+                <span class="passo-num">1</span>
+                <div>
+                  <strong>Adicione os arquivos na pasta:</strong>
+                  <p>Coloque imagens em <code>MIDEA/fotografia/</code> e vídeos em <code>MIDEA/videos/</code>.</p>
+                </div>
+              </div>
+
+              <div class="passo-item">
+                <span class="passo-num">2</span>
+                <div>
+                  <strong>Execute o script de atualização:</strong>
+                  <p>Dê um duplo clique no arquivo <code>atualizar_galeria.bat</code> na pasta raiz do projeto.</p>
+                </div>
+              </div>
+
+              <div class="passo-item">
+                <span class="passo-num">3</span>
+                <div>
+                  <strong>Pronto! Galeria atualizada:</strong>
+                  <p>O script detecta automaticamente todos os novos arquivos, formata os títulos e sincroniza com o site.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Campo interativo de pré-visualização e seleção de arquivos -->
+          <div class="sinc-upload-box">
+            <div class="upload-dropzone" id="upload-dropzone">
+              <span class="upload-icone">📂</span>
+              <h3>Pré-visualizar & Testar Novas Mídias</h3>
+              <p>Selecione ou arraste fotos (.jpg, .png, .webp) ou vídeos (.mp4, .webm) para conferir como ficarão na galeria antes de sincronizar:</p>
+              
+              <label for="input-midia-local" class="btn btn-dourado btn-sm upload-btn">
+                Selecionar Fotos ou Vídeos
+              </label>
+              <input type="file" id="input-midia-local" multiple accept="image/*,video/*" class="input-file-oculto">
+            </div>
+
+            <div id="preview-lista-arquivos" class="preview-lista-arquivos"></div>
+
+            <div class="sinc-botoes-atalho">
+              <button class="btn btn-outline btn-sm" id="btn-copiar-caminho" type="button">
+                📋 Copiar Caminho da Pasta /MIDEA
+              </button>
+              <button class="btn btn-secundario btn-sm" id="btn-info-script" type="button">
+                ℹ️ Como rodar atualizar_galeria.bat
+              </button>
+            </div>
+            <p id="sinc-status" class="nota-status" role="status"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SOLICITAÇÃO DE ORÇAMENTO / AGENDAMENTO ==================== -->
+    <section class="secao orcamento-secao" id="orcamento">
+      <div class="container">
+        <div class="box-orcamento-wrapper">
+          <div class="orcamento-texto">
+            <span class="eyebrow">ORÇAMENTO RÁPIDO & PRÁTICO</span>
+            <h2>Solicite seu orçamento e garanta o seu horário.</h2>
+            <p>
+              Preencha o formulário abaixo com os serviços desejados. Ao clicar em <strong>"Solicitar Orçamento no WhatsApp"</strong>, uma mensagem formatada será gerada automaticamente para você revisar e enviar diretamente ao barbeiro!
+            </p>
+
+            <div class="vantagens-orcamento">
+              <div class="vantagem-item">
+                <span class="v-check">✓</span>
+                <div>
+                  <strong>Sem complicações:</strong>
+                  <span>Atendimento rápido via WhatsApp direto com nossa equipe.</span>
+                </div>
+              </div>
+              <div class="vantagem-item">
+                <span class="v-check">✓</span>
+                <div>
+                  <strong>Preços transparentes:</strong>
+                  <span>Estimativa instantânea de valor e tempo de atendimento.</span>
+                </div>
+              </div>
+              <div class="vantagem-item">
+                <span class="v-check">✓</span>
+                <div>
+                  <strong>São José do Rio Preto:</strong>
+                  <span>Estacionamento facilitado e localização central na cidade.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resumo dinâmico -->
+            <div class="resumo-orcamento-card">
+              <span class="resumo-titulo">RESUMO DO ORÇAMENTO:</span>
+              <ul id="lista-resumo-servicos" class="lista-resumo">
+                <li class="item-vazio">Nenhum serviço selecionado ainda. Marque os serviços abaixo.</li>
+              </ul>
+              <div class="resumo-total">
+                <span>Total Estimado:</span>
+                <strong id="valor-total-estimado">R$ 0,00</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Formulário -->
+          <div class="orcamento-form-card">
+            <form id="form-orcamento" novalidate>
+              <div class="form-grupo">
+                <label for="cliente-nome">Seu Nome Completo *</label>
+                <input type="text" id="cliente-nome" name="nome" required maxlength="80" placeholder="Como podemos chamar você?" autocomplete="name">
+              </div>
+
+              <div class="form-grupo">
+                <label for="cliente-whatsapp">Seu WhatsApp / Telefone *</label>
+                <input type="tel" id="cliente-whatsapp" name="whatsapp" required maxlength="20" placeholder="(17) 99999-9999" autocomplete="tel">
+              </div>
+
+              <div class="form-grupo">
+                <label>Selecione os Serviços Desejados:</label>
+                <div class="opcoes-servicos-check">
+                  <label class="check-container">
+                    <input type="checkbox" name="servicos" value="Corte Degradê / Fade" data-preco="55">
+                    <span class="check-custom"></span>
+                    <span class="check-texto">Corte Degradê / Fade Navalhado — <strong>R$ 55</strong></span>
+                  </label>
+
+                  <label class="check-container">
+                    <input type="checkbox" name="servicos" value="Barba Terapia com Toalha Quente" data-preco="45">
+                    <span class="check-custom"></span>
+                    <span class="check-texto">Barba Terapia com Toalha Quente — <strong>R$ 45</strong></span>
+                  </label>
+
+                  <label class="check-container">
+                    <input type="checkbox" name="servicos" value="Combo Imperial (Cabelo + Barba)" data-preco="85">
+                    <span class="check-custom"></span>
+                    <span class="check-texto">Combo Imperial (Cabelo + Barba) — <strong>R$ 85</strong></span>
+                  </label>
+
+                </div>
+              </div>
+
+              <div class="form-linha-dupla">
+                <div class="form-grupo">
+                  <label for="cliente-data">Data de Preferência</label>
+                  <input type="date" id="cliente-data" name="data">
+                </div>
+
+                <div class="form-grupo">
+                  <label for="cliente-periodo">Período de Preferência</label>
+                  <select id="cliente-periodo" name="periodo">
+                    <option value="Qualquer horário disponível">Qualquer horário</option>
+                    <option value="Manhã (09h às 12h)">Manhã (09h às 12h)</option>
+                    <option value="Tarde (13h às 18h)">Tarde (13h às 18h)</option>
+                    <option value="Noite (18h às 20h)">Noite (18h às 20h)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grupo">
+                <label for="cliente-observacao">Observações ou Dúvidas (Opcional)</label>
+                <textarea id="cliente-observacao" name="observacao" rows="3" placeholder="Ex: Prefiro tesoura no topo, barba longa alinhada, etc."></textarea>
+              </div>
+
+              <button class="btn btn-whatsapp-submit" type="submit" id="btn-submit-orcamento">
+                <span class="icone-zap">💬</span> Solicitar Orçamento via WhatsApp
+              </button>
+
+              <p class="nota-seguranca">
+                🔒 Seus dados não são armazenados em servidores externos. A mensagem é montada diretamente no seu WhatsApp para envio seguro.
+              </p>
+              <p id="form-msg-retorno" class="msg-retorno" role="status"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTATOS E LOCALIZAÇÃO ==================== -->
+    <section class="secao contato-secao" id="contato">
+      <div class="container">
+        <div class="cabecalho-secao text-center">
+          <span class="eyebrow">LOCALIZAÇÃO & ATENDIMENTO</span>
+          <h2>Onde Estamos & Como Falar Conosco</h2>
+          <p class="secao-descricao">Venha nos visitar em São José do Rio Preto ou entre em contato pelos nossos canais oficiais.</p>
+        </div>
+
+        <div class="grid-contatos">
+          <!-- WhatsApp Card -->
+          <div class="card-contato">
+            <div class="contato-icone zap-bg">💬</div>
+            <h3>WhatsApp da Barbearia</h3>
+            <p>Atendimento rápido para dúvidas, agendamentos e orçamentos em Rio Preto.</p>
+            <a href="https://wa.me/5517991007524?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20corte%20e%20barba." target="_blank" rel="noopener noreferrer" class="contato-link" id="link-whatsapp-contato">
+              (17) 99100-7524 ↗
+            </a>
+          </div>
+
+          <!-- Email Card -->
+          <div class="card-contato">
+            <div class="contato-icone email-bg">✉️</div>
+            <h3>E-mail Oficial</h3>
+            <p>Para dúvidas corporativas, orçamentos para eventos e contato administrativo.</p>
+            <a href="mailto:contato@barbeariariopreto.com.br" class="contato-link" id="link-email-contato">
+              contato@barbeariariopreto.com.br ↗
+            </a>
+          </div>
+
+          <!-- Endereço Card -->
+          <div class="card-contato">
+            <div class="contato-icone map-bg">📍</div>
+            <h3>Endereço em Rio Preto</h3>
+            <p>Ponto central, fácil acesso e ambiente totalmente climatizado com estacionamento.</p>
+            <address class="contato-endereco" id="texto-endereco-contato">
+              Rua Cel. Spínola de Castro, 3450<br>
+              Bairro Redentora / Centro<br>
+              São José do Rio Preto - SP • CEP 15015-500
+            </address>
+            <a href="https://maps.google.com/?q=São+José+do+Rio+Preto+SP" target="_blank" rel="noopener noreferrer" class="link-maps">
+              Abrir no Google Maps ↗
+            </a>
+          </div>
+
+          <!-- Horários Card -->
+          <div class="card-contato">
+            <div class="contato-icone clock-bg">⏰</div>
+            <h3>Horário de Funcionamento</h3>
+            <p>Atendimento profissional de segunda a sábado:</p>
+            <ul class="lista-horarios">
+              <li><span>Segunda a Sexta:</span> <strong>09:00 às 20:00</strong></li>
+              <li><span>Sábado:</span> <strong>08:30 às 19:00</strong></li>
+              <li><span>Domingo e Feriados:</span> <em>Fechado</em></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== RODAPÉ ==================== -->
+  <footer class="rodape">
+    <div class="container rodape-conteudo">
+      <div class="rodape-marca">
+        <div class="rodape-logo-wrap">
+          <img src="MIDEA/LOGO.svg" alt="Logo Barbearia Rio Preto" class="logo-rodape" onerror="this.src='MIDEA/LOGO.png'">
+          <span class="rodape-titulo">BARBEARIA RIO PRETO</span>
+        </div>
+        <p>Excelência em cortes de cabelo, barba clássica e atendimento de alto nível em São José do Rio Preto - SP.</p>
+      </div>
+
+      <div class="rodape-links">
+        <h4>Navegação Rápida</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#servicos">Serviços & Valores</a></li>
+          <li><a href="#galeria-secao">Galeria de Mídias</a></li>
+          <li><a href="#sincronizacao">Sincronizar Pasta /MIDEA</a></li>
+          <li><a href="#orcamento">Solicitar Orçamento</a></li>
+          <li><a href="#calendario-secao">Agendamento Online</a></li>
+          <li><a href="#contato">Contatos & Localização</a></li>
+          <li><a href="#admin" id="link-admin-rodape" class="link-admin-rodape">Área Administrativa (Proprietário) 🔐</a></li>
+        </ul>
+      </div>
+
+      <div class="rodape-cidade">
+        <h4>São José do Rio Preto - SP</h4>
+        <p>Rua Cel. Spínola de Castro, 3450 - Redentora</p>
+        <p>Telefone / WhatsApp: (17) 99100-7524</p>
+        <p>E-mail: contato@barbeariariopreto.com.br</p>
+      </div>
+    </div>
+
+    <div class="rodape-inferior">
+      <div class="container rodape-inferior-flex">
+        <span>© <span id="ano-atual">2026</span> Barbearia Rio Preto. Todos os direitos reservados.</span>
+        <span>Feito com HTML, CSS e Scripts Puros • Sem Frameworks.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== BOTÃO FLUTUANTE DE WHATSAPP ==================== -->
+  <a href="https://wa.me/5517991007524?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20ou%20solicitar%20um%20or%C3%A7amento%20na%20Barbearia%20Rio%20Preto." 
+     class="whatsapp-flutuante" 
+     id="whatsapp-flutuante" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Falar agora pelo WhatsApp">
+    <span class="icone-zap-flutuante">💬</span>
+    <span class="texto-zap-flutuante">Fale no WhatsApp</span>
+    <span class="badge-online" title="Online agora"></span>
+  </a>
+
+  <!-- ==================== MODAL / VISUALIZADOR DE MÍDIA (LIGHTBOX) ==================== -->
+  <dialog id="visualizador" class="visualizador-modal">
+    <div class="visualizador-janela">
+      <div class="visualizador-header">
+        <h3 id="visualizador-titulo" class="visualizador-titulo">Visualização</h3>
+        <button class="visualizador-fechar" id="visualizador-fechar" aria-label="Fechar visualização">✕</button>
+      </div>
+      <div id="visualizador-conteudo" class="visualizador-conteudo"></div>
+      <div class="visualizador-footer">
+        <button class="btn btn-dourado btn-sm" id="btn-modal-quero-esse" type="button">
+          💬 Quero esse estilo no WhatsApp
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ==================== MODAL / ÁREA ADMINISTRATIVA DO PROPRIETÁRIO ==================== -->
+  <dialog id="modal-admin" class="modal-admin">
+    <div class="modal-admin-janela">
+      <!-- Cabeçalho do Modal Admin -->
+      <div class="modal-admin-header">
+        <div class="admin-header-titulos">
+          <span class="admin-badge-topo">PAINEL DO PROPRIETÁRIO</span>
+          <h3 id="admin-modal-titulo">Área Administrativa & Gestão de Agendamentos</h3>
+        </div>
+        <button type="button" class="visualizador-fechar" id="btn-fechar-admin" aria-label="Fechar painel">✕</button>
+      </div>
+
+      <!-- VISÃO 1: FORMULÁRIO DE LOGIN -->
+      <div id="visao-admin-login" class="visao-admin-box">
+        <div class="login-card-interno">
+          <div class="login-icone-emblema">🔐</div>
+          <h4>Acesso Restrito ao Barbeiro / Proprietário</h4>
+          <p>Digite seu usuário e senha de administrador para gerenciar e aceitar os agendamentos dos clientes.</p>
+
+          <form id="form-admin-login" novalidate>
+            <div class="form-grupo">
+              <label for="admin-usuario">Usuário de Administrador</label>
+              <input type="text" id="admin-usuario" name="usuario" required placeholder="Ex: admin" autocomplete="username">
+            </div>
+
+            <div class="form-grupo">
+              <label for="admin-senha">Senha de Acesso</label>
+              <input type="password" id="admin-senha" name="senha" required placeholder="Digite sua senha" autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn btn-dourado btn-block">
+              Entrar no Painel ↗
+            </button>
+
+            <p id="msg-login-erro" class="msg-retorno erro-msg" role="status"></p>
+
+            <div class="dica-login-box">
+              <small>Usuario: <code>admin</code>. Use a senha configurada pelo proprietario.</small>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- VISÃO 2: DASHBOARD ADMINISTRATIVO (QUANDO LOGADO) -->
+      <div id="visao-admin-painel" class="visao-admin-box" style="display: none;">
+        <!-- Barra de Ações do Admin -->
+        <div class="admin-top-bar">
+          <div class="admin-usuario-info">
+            <span class="admin-avatar">👤</span>
+            <div>
+              <strong>Proprietário Conectado</strong>
+              <small>Barbearia Rio Preto • São José do Rio Preto</small>
+            </div>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm btn-logout" id="btn-admin-logout">
+            🚪 Sair do Painel
+          </button>
+        </div>
+
+        <!-- Indicadores Rápidos -->
+        <div class="admin-metricas-grid">
+          <div class="card-metrica-admin metrica-pendente">
+            <span class="metrica-numero" id="cont-pendentes">0</span>
+            <span class="metrica-rotulo">⏳ Pendentes de Aprovação</span>
+          </div>
+          <div class="card-metrica-admin metrica-aprovado">
+            <span class="metrica-numero" id="cont-aprovados">0</span>
+            <span class="metrica-rotulo">🔒 Aprovados (Horários Bloqueados)</span>
+          </div>
+          <div class="card-metrica-admin metrica-total">
+            <span class="metrica-numero" id="cont-total">0</span>
+            <span class="metrica-rotulo">📅 Total de Agendamentos</span>
+          </div>
+        </div>
+
+        <!-- Ferramenta de Bloqueio Manual de Horário -->
+        <details class="admin-bloqueio-manual">
+          <summary class="btn btn-secundario btn-sm">➕ Bloquear um Horário Manualmente (Folga / Almoço / Manutenção)</summary>
+          <form id="form-bloqueio-manual" class="form-bloqueio-inline">
+            <div class="form-grupo-inline">
+              <label for="bloqueio-data">Data:</label>
+              <input type="date" id="bloqueio-data" required>
+            </div>
+            <div class="form-grupo-inline">
+              <label for="bloqueio-hora">Horário:</label>
+              <select id="bloqueio-hora" required>
+                <option value="09:00">09:00</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+              </select>
+            </div>
+            <div class="form-grupo-inline">
+              <label for="bloqueio-motivo">Motivo:</label>
+              <input type="text" id="bloqueio-motivo" placeholder="Ex: Intervalo de Almoço" value="Horário Bloqueado pelo Barbeiro">
+            </div>
+            <button type="submit" class="btn btn-dourado btn-sm">Bloquear Horário</button>
+          </form>
+        </details>
+
+        <!-- Filtros de Listagem -->
+        <div class="admin-filtros-bar">
+          <div class="filtros-status" role="group" aria-label="Filtrar agendamentos">
+            <button type="button" class="btn-filtro-admin ativo" data-status-filtro="todos">Todos</button>
+            <button type="button" class="btn-filtro-admin" data-status-filtro="pendente">⏳ Pendentes</button>
+            <button type="button" class="btn-filtro-admin" data-status-filtro="aprovado">🔒 Aprovados (Bloqueados)</button>
+            <button type="button" class="btn-filtro-admin" data-status-filtro="recusado">✕ Recusados</button>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" id="btn-atualizar-admin">🔄 Atualizar Lista</button>
+        </div>
+
+        <!-- Lista de Solicitações -->
+        <div class="admin-tabela-wrapper">
+          <div id="lista-agendamentos-admin" class="lista-agendamentos-admin">
+            <!-- Preenchido via JavaScript -->
+          </div>
+          <p id="msg-tabela-vazia" class="tabela-vazia-msg" style="display: none;">Nenhum agendamento encontrado para o filtro selecionado.</p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+</body>
+</html>
