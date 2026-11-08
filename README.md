@@ -1,3 +1,5 @@
+> Atualizacao: a agenda agora usa Cloudflare Worker + Supabase. Consulte [PUBLICACAO.md](PUBLICACAO.md) para configurar o banco e publicar. As instrucoes antigas abaixo sobre abrir index.html e senhas padrao nao se aplicam a agenda compartilhada.
+
 # Barbearia Rio Preto — Site de Serviços & Agendamento
 
 Site profissional e moderno para barbearia especializada em corte de cabelo e barba em **São José do Rio Preto - SP**.

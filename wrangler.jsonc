@@ -1,0 +1,7 @@
+{
+  "name": "projeto-barber-novo",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-08",
+  "assets": { "directory": "./public", "binding": "ASSETS", "run_worker_first": ["/api/*"] },
+  "vars": { "SUPABASE_URL": "https://ubwswitfmjmzquloanzo.supabase.co" }
+}

@@ -34,14 +34,8 @@ const CONFIG_BARBEARIA = {
   // Credenciais Padrão do Proprietário (Área Administrativa)
   admin: {
     usuario: "admin",
-    senha: "admin123"
+    // Password validated by server.
   }
-};
-
-// Chaves de armazenamento local (LocalStorage)
-const STORAGE_KEYS = {
-  agendamentos: "barbearia_agendamentos",
-  adminLogado: "barbearia_admin_logado"
 };
 
 // Horários de atendimento disponíveis para agendamento (Segunda a Sábado)
@@ -67,7 +61,7 @@ let filtroStatusAdmin = "todos"; // Filtro da lista de agendamentos no painel ad
 
 // ==================== INICIALIZAÇÃO APÓS CARREGAMENTO DO DOM ====================
 document.addEventListener("DOMContentLoaded", () => {
-  limparAgendamentosExemplo();
+  inicializarAgendaCompartilhada();
   inicializarMenuMobile();
   inicializarGaleria();
   inicializarSincronizacaoMidia();
@@ -388,42 +382,56 @@ function inicializarSincronizacaoMidia() {
 /**
  * Obtém todos os agendamentos persistidos no LocalStorage
  */
-function obterAgendamentos() {
+let agendaCompartilhada = [];
+let credencialAdmin = "";
+let agendaDisponivel = false;
+let consultaAgenda = 0;
+function obterAgendamentos() { return agendaCompartilhada.map(ag => ({...ag})); }
+async function requisitarAgenda(method = "GET", body, endpoint = "/api/agendamentos") {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.agendamentos);
-    return raw ? JSON.parse(raw) : [];
-  } catch (e) {
-    console.error("Erro ao ler agendamentos do LocalStorage:", e);
-    return [];
-  }
+    const response = await fetch(endpoint, {
+      method, cache: "no-store", signal: controller.signal,
+      headers: {"Content-Type":"application/json", ...(credencialAdmin ? {Authorization:credencialAdmin} : {})},
+      ...(body ? {body:JSON.stringify(body)} : {})
+    });
+    let result;
+    try { result = await response.json(); }
+    catch { throw new Error("Agenda compartilhada indisponivel nesta hospedagem."); }
+    if (!response.ok) throw new Error(result.erro || "Erro ao consultar a agenda.");
+    return result;
+  } finally { clearTimeout(timeout); }
 }
-
-/**
- * Salva a lista de agendamentos no LocalStorage
- */
-function salvarAgendamentos(lista) {
+async function atualizarAgendaCompartilhada() {
+  const consulta = ++consultaAgenda;
   try {
-    localStorage.setItem(STORAGE_KEYS.agendamentos, JSON.stringify(lista));
-  } catch (e) {
-    console.error("Erro ao salvar agendamentos:", e);
+    const lista = await requisitarAgenda();
+    if (consulta !== consultaAgenda) return;
+    if (!Array.isArray(lista)) throw new Error("Resposta invalida da agenda.");
+    agendaCompartilhada = lista;
+    agendaDisponivel = true;
+    if (lista.some(ag => ag.data === dataSelecionadaISO && ag.horario === horarioSelecionado && ag.status === "aprovado")) horarioSelecionado = "";
+    document.getElementById("status-agenda-compartilhada").textContent = "Agenda sincronizada.";
+  } catch (error) {
+    if (consulta !== consultaAgenda) return;
+    agendaDisponivel = false;
+    document.getElementById("status-agenda-compartilhada").textContent = "Agenda indisponivel. Verifique a conexao e a configuracao da hospedagem.";
   }
+  renderizarGradeHorarios();
+  atualizarDashboardAdminSeAberto();
 }
-
-/**
- * Limpa agendamentos de exemplo para que novos visitantes e clientes em celulares
- * encontrem a grade real de horários 100% livres e disponíveis.
- */
-function limparAgendamentosExemplo() {
-  try {
-    const lista = obterAgendamentos();
-    // Remove qualquer agendamento de teste antigo (como agend-exemplo-1 ou agend-exemplo-2)
-    const listaLimpa = lista.filter(ag => !ag.id.startsWith("agend-exemplo-"));
-    if (listaLimpa.length !== lista.length) {
-      salvarAgendamentos(listaLimpa);
-    }
-  } catch (e) {
-    console.error("Erro ao limpar agendamentos de exemplo:", e);
-  }
+async function gravarAlteracaoAgenda(method, body) {
+  try { await requisitarAgenda(method, body); }
+  catch (error) { alert(error.message); await atualizarAgendaCompartilhada(); return false; }
+  await atualizarAgendaCompartilhada();
+  return true;
+}
+function inicializarAgendaCompartilhada() {
+  atualizarAgendaCompartilhada();
+  setInterval(() => { if (!document.hidden) atualizarAgendaCompartilhada(); },15000);
+  window.addEventListener("focus", atualizarAgendaCompartilhada);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) atualizarAgendaCompartilhada(); });
 }
 
 function formatarDataParaISO(data) {
@@ -613,6 +621,10 @@ function renderizarGradeHorarios() {
   }
 
   // Obtém todos os agendamentos registrados para a data selecionada
+  if (!agendaDisponivel) {
+    containerSlots.textContent = "Aguarde a conexao com a agenda para selecionar um horario.";
+    return;
+  }
   const todosAgendamentos = obterAgendamentos();
   const agendamentosDoDia = todosAgendamentos.filter(ag => ag.data === dataSelecionadaISO);
 
@@ -681,7 +693,7 @@ function selecionarSlot(slot, botaoEl) {
 /**
  * Processa a submissão do formulário de agendamento pelo cliente
  */
-function processarEnvioAgendamentoCliente(e) {
+async function processarEnvioAgendamentoCliente(e) {
   e.preventDefault();
 
   const nomeInput = document.getElementById("agend-cliente-nome");
@@ -739,8 +751,7 @@ function processarEnvioAgendamentoCliente(e) {
     criadoEm: new Date().toISOString()
   };
 
-  agendamentos.push(novoAgendamento);
-  salvarAgendamentos(agendamentos);
+  if (!await gravarAlteracaoAgenda("POST", novoAgendamento)) return;
 
   // Atualiza horários na tela
   renderizarGradeHorarios();
@@ -813,7 +824,7 @@ function inicializarAreaAdministrativa() {
 
   // Login do Administrador
   if (formLogin) {
-    formLogin.addEventListener("submit", (e) => {
+    formLogin.addEventListener("submit", async (e) => {
       e.preventDefault();
       const usuarioInput = document.getElementById("admin-usuario");
       const senhaInput = document.getElementById("admin-senha");
@@ -823,18 +834,16 @@ function inicializarAreaAdministrativa() {
       const senha = senhaInput ? senhaInput.value.trim() : "";
 
       // Validação de credenciais do proprietário
-      if (
-        (usuario === CONFIG_BARBEARIA.admin.usuario || usuario === "barbeiro") &&
-        (senha === CONFIG_BARBEARIA.admin.senha || senha === "barbearia123" || senha === "rio preto2026")
-      ) {
-        localStorage.setItem(STORAGE_KEYS.adminLogado, "true");
+      try {
+        credencialAdmin = "Basic " + btoa(usuario + ":" + senha);
+        await requisitarAgenda("POST", {}, "/api/login");
         if (msgErro) msgErro.textContent = "";
         if (senhaInput) senhaInput.value = "";
+        await atualizarAgendaCompartilhada();
         checarEstadoSessaoAdmin();
-      } else {
-        if (msgErro) {
-          msgErro.textContent = "Usuário ou senha incorretos. Verifique a dica abaixo.";
-        }
+      } catch (error) {
+        credencialAdmin = "";
+        if (msgErro) msgErro.textContent = error.message;
       }
     });
   }
@@ -842,7 +851,9 @@ function inicializarAreaAdministrativa() {
   // Logout
   if (btnLogout) {
     btnLogout.addEventListener("click", () => {
-      localStorage.removeItem(STORAGE_KEYS.adminLogado);
+      credencialAdmin = "";
+      agendaCompartilhada = [];
+      atualizarAgendaCompartilhada();
       checarEstadoSessaoAdmin();
     });
   }
@@ -859,7 +870,7 @@ function inicializarAreaAdministrativa() {
 
   // Atualizar lista
   if (btnAtualizarLista) {
-    btnAtualizarLista.addEventListener("click", () => renderizarPainelAdmin());
+    btnAtualizarLista.addEventListener("click", atualizarAgendaCompartilhada);
   }
 
   // Bloqueio manual de horário pelo proprietário
@@ -868,7 +879,7 @@ function inicializarAreaAdministrativa() {
     const inputDataBloqueio = document.getElementById("bloqueio-data");
     if (inputDataBloqueio) inputDataBloqueio.value = formatarDataParaISO(new Date());
 
-    formBloqueioManual.addEventListener("submit", (e) => {
+    formBloqueioManual.addEventListener("submit", async (e) => {
       e.preventDefault();
       const dataB = document.getElementById("bloqueio-data").value;
       const horaB = document.getElementById("bloqueio-hora").value;
@@ -899,8 +910,7 @@ function inicializarAreaAdministrativa() {
         criadoEm: new Date().toISOString()
       };
 
-      agendamentos.push(novoBloqueio);
-      salvarAgendamentos(agendamentos);
+      if (!await gravarAlteracaoAgenda("POST", novoBloqueio)) return;
 
       alert(`Horário das ${horaB} no dia ${formatarDataParaBR(dataB)} BLOQUEADO no calendário do site com sucesso!`);
       renderizarPainelAdmin();
@@ -913,7 +923,7 @@ function inicializarAreaAdministrativa() {
  * Verifica se a sessão do administrador está ativa e troca de tela
  */
 function checarEstadoSessaoAdmin() {
-  const estaLogado = localStorage.getItem(STORAGE_KEYS.adminLogado) === "true";
+  const estaLogado = Boolean(credencialAdmin);
   const visaoLogin = document.getElementById("visao-admin-login");
   const visaoPainel = document.getElementById("visao-admin-painel");
   const tituloModal = document.getElementById("admin-modal-titulo");
@@ -981,7 +991,8 @@ function renderizarPainelAdmin() {
 
   if (msgVazia) msgVazia.style.display = "none";
 
-  filtrados.forEach(ag => {
+  filtrados.forEach(registro => {
+    const ag = Object.fromEntries(Object.entries(registro).map(([key, value]) => [key, typeof value === "string" ? value.replace(/[&<>"\']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "\'":"&#39;"}[c])) : value]));
     const card = document.createElement("article");
     card.className = `card-agendamento-item status-borda-${ag.status}`;
 
@@ -1083,14 +1094,13 @@ function renderizarPainelAdmin() {
 /**
  * Muda o status do agendamento (Ex: para 'aprovado' -> BLOQUEIA O HORÁRIO NO CALENDÁRIO)
  */
-function alterarStatusAgendamento(agendamentoId, novoStatus) {
+async function alterarStatusAgendamento(agendamentoId, novoStatus) {
   const agendamentos = obterAgendamentos();
   const index = agendamentos.findIndex(ag => ag.id === agendamentoId);
 
   if (index === -1) return;
 
-  agendamentos[index].status = novoStatus;
-  salvarAgendamentos(agendamentos);
+  if (!await gravarAlteracaoAgenda("PATCH", {id:agendamentoId, status:novoStatus})) return;
 
   // Se foi aprovado, avisa com destaque que o horário foi bloqueado
   if (novoStatus === "aprovado") {
@@ -1107,12 +1117,12 @@ function alterarStatusAgendamento(agendamentoId, novoStatus) {
   renderizarGradeHorarios(); // Atualiza em tempo real o calendário do site!
 }
 
-function excluirAgendamento(agendamentoId) {
+async function excluirAgendamento(agendamentoId) {
   if (!confirm("Deseja realmente excluir este agendamento do sistema?")) return;
 
   let agendamentos = obterAgendamentos();
   agendamentos = agendamentos.filter(ag => ag.id !== agendamentoId);
-  salvarAgendamentos(agendamentos);
+  if (!await gravarAlteracaoAgenda("DELETE", {id:agendamentoId})) return;
 
   renderizarPainelAdmin();
   renderizarGradeHorarios();
