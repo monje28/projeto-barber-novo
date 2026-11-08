@@ -67,7 +67,7 @@ let filtroStatusAdmin = "todos"; // Filtro da lista de agendamentos no painel ad
 
 // ==================== INICIALIZAÇÃO APÓS CARREGAMENTO DO DOM ====================
 document.addEventListener("DOMContentLoaded", () => {
-  garantirDadosIniciaisAgendamento();
+  limparAgendamentosExemplo();
   inicializarMenuMobile();
   inicializarGaleria();
   inicializarSincronizacaoMidia();
@@ -410,45 +410,19 @@ function salvarAgendamentos(lista) {
 }
 
 /**
- * Insere agendamentos de exemplo caso o LocalStorage esteja vazio,
- * demonstrando imediatamente o bloqueio automático de vagas.
+ * Limpa agendamentos de exemplo para que novos visitantes e clientes em celulares
+ * encontrem a grade real de horários 100% livres e disponíveis.
  */
-function garantirDadosIniciaisAgendamento() {
-  const lista = obterAgendamentos();
-  if (lista.length === 0) {
-    const hoje = new Date();
-    // Próximo dia útil
-    const dataAmanha = new Date(hoje);
-    dataAmanha.setDate(hoje.getDate() + 1);
-    if (dataAmanha.getDay() === 0) {
-      dataAmanha.setDate(dataAmanha.getDate() + 1); // Pula domingo
+function limparAgendamentosExemplo() {
+  try {
+    const lista = obterAgendamentos();
+    // Remove qualquer agendamento de teste antigo (como agend-exemplo-1 ou agend-exemplo-2)
+    const listaLimpa = lista.filter(ag => !ag.id.startsWith("agend-exemplo-"));
+    if (listaLimpa.length !== lista.length) {
+      salvarAgendamentos(listaLimpa);
     }
-    const dataISO = formatarDataParaISO(dataAmanha);
-
-    const exemplos = [
-      {
-        id: "agend-exemplo-1",
-        nome: "Gabriel Siqueira",
-        telefone: "(17) 99876-5432",
-        servico: "Corte Degradê / Fade (R$ 55,00)",
-        data: dataISO,
-        horario: "10:00",
-        status: "aprovado", // Bloqueia o horário das 10:00!
-        criadoEm: new Date().toISOString()
-      },
-      {
-        id: "agend-exemplo-2",
-        nome: "Marcos Vinicius",
-        telefone: "(17) 99123-4567",
-        servico: "Barba Terapia com Toalha Quente (R$ 45,00)",
-        data: dataISO,
-        horario: "15:00",
-        status: "pendente", // Aguarda aprovação do proprietário
-        criadoEm: new Date().toISOString()
-      }
-    ];
-
-    salvarAgendamentos(exemplos);
+  } catch (e) {
+    console.error("Erro ao limpar agendamentos de exemplo:", e);
   }
 }
 
@@ -613,9 +587,9 @@ function renderizarGradeHorarios() {
     return;
   }
 
-  // Interpreta data selecionada
+  // Interpreta data selecionada (usando meio-dia para evitar bug de fuso horário no Safari do iPhone)
   const [ano, mes, dia] = dataSelecionadaISO.split("-").map(Number);
-  const dataObj = new Date(ano, mes - 1, dia);
+  const dataObj = new Date(ano, mes - 1, dia, 12, 0, 0);
   const diaSemanaNome = DIAS_SEMANA_PT[dataObj.getDay()];
   const dataFormatadaBR = `${dia}/${String(mes).padStart(2, "0")}/${ano}`;
 
@@ -667,26 +641,17 @@ function renderizarGradeHorarios() {
 
     const infoHorario = mapaStatusHorarios[slot];
 
-    // REGRA DE OURO: SE FOR ACEITO PELO PROPRIETÁRIO -> BLOQUEIO AUTOMÁTICO!
+    // REGRA DE OURO: SOMENTE HORÁRIO ACEITO PELO PROPRIETÁRIO FICA BLOQUEADO!
     if (infoHorario && infoHorario.status === "aprovado") {
       btnSlot.classList.add("bloqueado");
       btnSlot.disabled = true;
-      btnSlot.title = `Horário das ${slot} já reservado e confirmado na barbearia.`;
+      btnSlot.title = `Horário das ${slot} já reservado e aceito pelo proprietário.`;
       btnSlot.innerHTML = `
         <span>${slot} 🔒</span>
         <span class="slot-status-texto">(Ocupado)</span>
       `;
-    } else if (infoHorario && infoHorario.status === "pendente") {
-      btnSlot.classList.add("pendente");
-      btnSlot.title = `Horário das ${slot} possui solicitação em análise pelo proprietário.`;
-      btnSlot.innerHTML = `
-        <span>${slot} ⏳</span>
-        <span class="slot-status-texto">Em análise</span>
-      `;
-      // Permite ao cliente tentar agendar ou escolher outro
-      btnSlot.addEventListener("click", () => selecionarSlot(slot, btnSlot));
     } else {
-      // Horário completamente Livre
+      // Se não foi aceito pelo proprietário, o horário está 100% DISPONÍVEL para o cliente!
       btnSlot.innerHTML = `
         <span>${slot}</span>
         <span class="slot-status-texto" style="color: #34d399;">Disponível</span>

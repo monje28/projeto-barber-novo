@@ -2587,21 +2587,282 @@ button, input, select, textarea {
   }
 }
 
-@media (max-width: 600px) {
-  .header-acoes .btn-header-agendar {
-    display: none;
+/* ==========================================================================
+   OTIMIZAÇÕES AVANÇADAS PARA IPHONE & NAVEGADORES MOBILE (SAFARI / CHROME)
+   ========================================================================== */
+
+/* Previne zoom invasivo ao tocar em campos de texto no Safari do iPhone */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input[type="text"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="password"],
+  input[type="search"] {
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  /* Cabeçalho enxuto e alinhado para a tela do iPhone */
+  .container-header {
+    padding: 0.65rem 0;
+    gap: 0.6rem;
   }
 
-  .cal-dias-semana span {
-    font-size: 0.7rem;
+  .marca {
+    gap: 0.55rem;
+    max-width: calc(100% - 130px);
+  }
+
+  .logo-icone {
+    width: 36px;
+    height: 36px;
+  }
+
+  .marca-nome {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .marca-cidade {
+    display: none; /* Evita quebra de linha indesejada em telas de iPhone */
+  }
+
+  .header-acoes {
+    gap: 0.4rem;
+  }
+
+  .btn-admin-header {
+    padding: 0.38rem 0.65rem;
+    font-size: 0.76rem;
+    border-radius: var(--borda-raio-sm);
+  }
+
+  .header-acoes .btn-header-agendar {
+    display: none; /* Deixa a barra limpa no topo; botão de agendar está no Hero */
+  }
+
+  .menu-toggle {
+    padding: 0.45rem;
+  }
+
+  /* Seções e Espaçamentos no Celular */
+  .secao {
+    padding: 3.5rem 0;
+  }
+
+  .cabecalho-secao {
+    margin-bottom: 2rem;
+  }
+
+  .cabecalho-secao h2 {
+    font-size: 1.7rem;
+  }
+
+  .secao-descricao {
+    font-size: 0.95rem;
+  }
+
+  /* Hero no iPhone */
+  .hero {
+    min-height: auto;
+    padding: 3rem 0 3.8rem 0;
+  }
+
+  .hero-titulo {
+    font-size: 2.1rem;
+    line-height: 1.2;
+  }
+
+  .hero-subtitulo {
+    font-size: 1rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-botoes {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .hero-botoes .btn {
+    width: 100%;
+  }
+
+  .hero-card-destaque {
+    padding: 1.8rem 1.4rem;
+  }
+
+  .moldura-logo {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 1rem;
+  }
+
+  /* Calendário no iPhone: Espaço aproveitado ao máximo */
+  .widget-calendario {
+    padding: 1rem 0.65rem;
+    border-radius: var(--borda-raio-sm);
+  }
+
+  .cal-cabecalho {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .cal-titulo-mes {
+    font-size: 1.05rem;
+  }
+
+  .btn-cal-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .cal-dias-semana {
+    font-size: 0.68rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .cal-grade-dias {
+    gap: 4px;
   }
 
   .cal-dia {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
+    border-radius: 6px;
+  }
+
+  .cal-legenda {
+    gap: 0.6rem;
+    font-size: 0.72rem;
+  }
+
+  /* Grade de Horários no iPhone: 3 colunas legíveis */
+  .widget-horarios {
+    padding: 1.1rem 0.85rem;
   }
 
   .grid-slots-horarios {
     grid-template-columns: repeat(3, 1fr);
+    gap: 0.55rem;
+  }
+
+  .slot-hora {
+    padding: 0.6rem 0.25rem;
+    font-size: 0.85rem;
+    min-height: 52px;
+    justify-content: center;
+  }
+
+  .slot-status-texto {
+    font-size: 0.64rem;
+  }
+
+  /* Formulário de Agendamento do Cliente */
+  .card-form-agendamento {
+    padding: 1.6rem 1.1rem;
+    border-radius: var(--borda-raio-md);
+  }
+
+  .card-form-agendamento h3 {
+    font-size: 1.25rem;
+  }
+
+  .btn-agendar-submit {
+    font-size: 0.95rem;
+  }
+
+  /* Grid de Serviços no iPhone */
+  .grid-servicos {
+    grid-template-columns: 1fr;
+    gap: 1.3rem;
+  }
+
+  .card-servico {
+    padding: 1.6rem 1.3rem;
+  }
+
+  /* Galeria no iPhone */
+  .galeria-controles {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .busca-galeria input {
+    width: 100%;
+  }
+
+  .galeria-grid {
+    grid-template-columns: 1fr;
+    gap: 1.3rem;
+  }
+
+  /* Orçamento & Formulário */
+  .orcamento-form-card {
+    padding: 1.6rem 1.1rem;
+  }
+
+  /* Sincronização / Upload */
+  .box-sincronizacao {
+    padding: 1.4rem 1rem;
+  }
+
+  /* Botão Flutuante de WhatsApp adaptado ao Safe Area do iPhone */
+  .whatsapp-flutuante {
+    bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+    right: 1.2rem;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+  }
+
+  .whatsapp-flutuante .texto-zap-flutuante {
+    display: none;
+  }
+
+  .whatsapp-flutuante .badge-online {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+
+  /* Janela Modal do Administrador no iPhone */
+  .modal-admin-janela {
+    max-height: 85vh;
+  }
+
+  .modal-admin-header {
+    padding: 1rem 1.2rem;
+  }
+
+  .visao-admin-box {
+    padding: 1.1rem 0.9rem;
+  }
+
+  .admin-top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .form-bloqueio-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-bloqueio-inline button {
+    width: 100%;
   }
 
   .agendamento-item-acoes {
@@ -2609,8 +2870,13 @@ button, input, select, textarea {
     align-items: stretch;
   }
 
+  .agendamento-item-acoes button {
+    width: 100%;
+    text-align: center;
+  }
+
   .btn-excluir-agend {
     margin-left: 0;
-    text-align: center;
+    margin-top: 0.3rem;
   }
 }
